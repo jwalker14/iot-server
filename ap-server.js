@@ -13,7 +13,7 @@ rest.get('/', function(reqq, res){
 })
 
 rest.get('/users', function(req, res) {
-  new User().model.find({}, function(err, users) {
+  User.find({}, function(err, users) {
     res.json(users);
   });
 });
