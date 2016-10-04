@@ -6,6 +6,7 @@ var Schema = mongoose.mg.Schema({
 	pw: {type: String, required: [true, 'Password is required.']},
 	last_login: {type: Date, default: Date.now},
 	confirmed_at: {type: Date},
+  salt: {type: String, require: [true, 'Salt is required']}
 })
 
 module.exports = mongoose.mg.model('User', Schema)

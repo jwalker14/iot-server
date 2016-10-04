@@ -2,6 +2,7 @@
 jwt = require('jwt-simple');
 Promise = require('promise');
 crypto = require('crypto');
+bcrypt = require('bcrypt');
 
 // VARIOUS SETTINGS
 settings = require('./config/settings.js')

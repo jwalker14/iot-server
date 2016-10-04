@@ -8,8 +8,21 @@ mosca = new Mosca(settings)
 // var u = new User()
 
 //Turn On RESTful services
-rest.get('/', function(reqq, res){
+rest.get('/', function(req, res){
 	res.send("RESTful Services")
+
+  // var salt = bcrypt.genSaltSync(10);
+  // var hash = bcrypt.hashSync('supersecret', salt);
+
+  // var user = new User({
+  //   first_name: 'Jason',
+  //   last_name: 'Walker',
+  //   email: 'jwalker14@me.com',
+  //   pw: hash,
+  //   salt: salt
+  // })
+
+  // user.save()
 })
 
 rest.get('/users', function(req, res) {
