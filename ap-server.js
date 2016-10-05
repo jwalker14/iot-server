@@ -1,14 +1,18 @@
 // REST
 require('./globals.js')
-
+var fs = require("fs")
 // START THE MQTT SERVER
 Mosca = require('./classes/Mosca.js');
 mosca = new Mosca(settings)
 
+var key = new NodeRSA({b: 256})
+console.log(key.generateKeyPair())
+var publicComponents = key.exportKey('components-public');
+console.log(fs.writeFile('./public.txt', publicComponents.n.toString()));
 // var u = new User()
 
 //Turn On RESTful services
-rest.get('/', function(req, res){
+rest.get('/api/v1', function(req, res){
 	res.send("RESTful Services")
 
   // var salt = bcrypt.genSaltSync(10);
@@ -25,13 +29,57 @@ rest.get('/', function(req, res){
   // user.save()
 })
 
-rest.get('/users', function(req, res) {
+//AUTHORIZE HERE
+rest.get('/api/v1/authorize', function(req, res){
+
+})
+
+rest.get('/api/v1/device/authorize', function(req,res){
+
+})
+
+
+//CANT PASS UNTIL AUTHED
+rest.use(function(req,res,next){
+	return res.status(403).send({
+		success: false,
+		message: 'NOT HAPPENING'
+	})
+})
+
+
+//USERS
+rest.get('/api/v1/users', function(req, res) {
   User.find({}, function(err, users) {
     res.json(users);
   });
 });
 
-RESTfulServices.listen(3000, function(){
+//get a list of devices
+rest.route('/api/v1/devices')
+	.get(function(req, res){
+
+	})
+	.post(function(req, res){
+
+	})
+
+//get a single device
+rest.route('/api/v1/device/:id')	//match all routes
+	.get(function(req, res){		// GET THE REQUESTED DEVICE
+
+	})
+	.put(function(req, res){		// PUT WHOLE DEVICE MODEL
+
+	})
+	.patch(function(req,res){		// PUT ONLY CHANGED ATTRIBUTES (just implement the same)
+
+	})
+	.delete(function(req, res){	// DELETE THE SPECIFIED DEVICE
+
+	})
+
+RESTfulServices.listen(settings.RESTful.port, function(){
 	console.log('listening on *:3000')
 })
 
