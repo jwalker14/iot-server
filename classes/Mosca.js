@@ -5,16 +5,21 @@ var mosca = require('mosca');
 function Mosca(){
 
 	this.ascoltatore = {
-	  //using ascoltatore
-	  type: 'mongo',
-	  url: settings.mongo.uri,
-	  pubsubCollection: 'MQTT',
-	  mongo: {}
+		//using ascoltatore
+		type: 'mongo',
+		url: settings.mongo.uri,
+		pubsubCollection: 'MQTT',
+		mongo: {}
 	},
 
 	this.settings = {
-		post: 1883,
-		backend: this.ascoltatore
+		port: 1883,
+		backend: this.ascoltatore,
+		http: {
+		port: 1884,
+		bundle: true,
+		static: './'
+		}
 	},
 
 	//Create the server
@@ -35,7 +40,7 @@ function Mosca(){
 
 Mosca.prototype = {
 	setup: function(){
-		console.log('Mosca server is up and running');
+		console.log('MQTT up');
 	},
 
 	clientConnected: function(client){
@@ -50,9 +55,9 @@ Mosca.prototype = {
 		console.log('disconnected', client.id)
 	},
 
-	published: function(packet, client){
-		console.log('published', packet)
-		console.log('from', client)
+	published: function(packet){
+		var url_arr = packet.topic.split('/')
+		console.log('published', url_arr)
 	},
 
 	delivered: function(packet, client){

@@ -20,9 +20,18 @@ Queue.prototype = {
 		this.tail.setNext(n)
 		this.tail = n
 	},
+	toArray: function(){
+		var tmp = this.head
+		var arr = []
 
+		while(tmp != null){
+			arr.push(tmp.getLabel())
+			tmp = tmp.getNext()
+		}
+		return arr
+	},
 	toString: function(){
-		tmp = this.head
+		var tmp = this.head
 		var s = ''
 
 		while(tmp != null){

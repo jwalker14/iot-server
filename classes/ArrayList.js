@@ -2,6 +2,10 @@
 
 //http://www.ecma-international.org/ecma-262/5.1/#sec-15.4
 
+Array.prototype.clone = function() {
+	return this.slice(0);
+};
+
 var ArrayList = Array
 
 ArrayList.prototype.indexOfEdge = function(l){
@@ -27,5 +31,7 @@ ArrayList.prototype.indexOfVertex = function(l){
 	}
 	return -1
 };
+
+
 
 module.exports = ArrayList

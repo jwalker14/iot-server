@@ -1,3 +1,4 @@
+settings = require('./config/settings.js')
 //LIBRARIES
 jwt = require('jwt-simple');
 Promise = require('promise');
@@ -10,9 +11,18 @@ cookieParser = require('cookie-parser');
 NodeRSA = require('node-rsa');
 passport = require('passport');
 cors = require('cors');
+HashMap = require('hashmap');
+async = require("async");
+
+ArrayList = require('./classes/ArrayList.js');
+
+Queue = require('./classes/Queue.js');
+Graph = require('node-dijkstra')
+fs = require("fs")
+
 
 // VARIOUS SETTINGS
-settings = require('./config/settings.js')
+
 
 // RESTFUL SERVICES
 rest = require('express')();
@@ -42,5 +52,11 @@ passport.deserializeUser(function(id, done){
 Mongoose = require('./classes/Mongoose.js')
 mongoose = new Mongoose(settings)
 
+
+//Automata Processor
+Automaton = require('./classes/Automaton.js');
+
 // MODELS
 User = require('./classes/User.js')
+ThingSchema = require('./classes/Thing.js').schema
+Thing = require('./classes/Thing.js').class
